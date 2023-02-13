@@ -16,7 +16,7 @@ class _MyDrawerState extends State<MyDrawer> {
         children: [
           Container(
             width: double.infinity,
-            color: Colors.blue,
+            color: Colors.purple.shade300,
             child: Column(
               children: [
                 SizedBox(height: 50,),
@@ -39,9 +39,12 @@ class _MyDrawerState extends State<MyDrawer> {
               ],
             ),
           ),
-          ListTile(
-            leading:Icon(Icons.note) ,
-            title :Text("All Notes"),
+          GestureDetector(
+            onTap: () => Navigator.pop(context),
+            child: ListTile(
+              leading:Icon(Icons.home) ,
+              title :Text("Home"),
+            ),
           ),
           ListTile(
             leading:Icon(Icons.settings) ,
