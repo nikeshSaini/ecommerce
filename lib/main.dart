@@ -1,4 +1,5 @@
 
+import 'package:ecommerce/screens/home_page.dart';
 import 'package:ecommerce/screens/login_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ void main() => runApp(
         fontFamily: GoogleFonts.lato().fontFamily,
       ),
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: HomePage(),
 
 
     )

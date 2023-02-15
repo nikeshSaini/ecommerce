@@ -5,6 +5,7 @@ import 'package:ecommerce/screens/login_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -39,8 +40,20 @@ class _HomePageState extends State<HomePage> {
         ),
         title: Center(child: Text("Catlog App" , style: TextStyle(color: Colors.black),)),
       ),
-      body: Center(
-        child:Container(),
+      body: Container(
+        height: 160,
+        width: double.infinity,
+        child: Padding(
+          padding: EdgeInsets.only(top: 10, left: 10,right: 10, bottom: 10),
+          child: ListView.builder(
+              itemCount: CatlogModel.items.length,
+              itemBuilder:(context, index){
+                return ItemWidget(
+                  item: CatlogModel.items[index],
+                );
+              }
+          ),
+        ),
       ),
     );
 
