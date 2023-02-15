@@ -1,4 +1,6 @@
+import 'package:ecommerce/model/catlog.dart';
 import 'package:ecommerce/screens/drawer.dart';
+import 'package:ecommerce/screens/item_widget.dart';
 import 'package:ecommerce/screens/login_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -38,13 +40,10 @@ class _HomePageState extends State<HomePage> {
         title: Center(child: Text("Catlog App" , style: TextStyle(color: Colors.black),)),
       ),
       body: Center(
-        child: Container(
-          child: Text("Home Page", style: TextStyle(
-            color: Colors.black,
-            fontSize: 40
-          ),),
-        ),
+        child:Container(),
       ),
     );
+
+
   }
 }
