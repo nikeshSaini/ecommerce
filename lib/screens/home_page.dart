@@ -4,6 +4,8 @@ import 'package:ecommerce/screens/item_widget.dart';
 import 'package:ecommerce/screens/login_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'dart:convert';
 
 
 class HomePage extends StatefulWidget {
@@ -14,6 +16,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,23 +47,43 @@ class _HomePageState extends State<HomePage> {
         ),
         title: Center(child: Text("Catlog App" , style: TextStyle(color: Colors.black),)),
       ),
-      body: Container(
-        height: 160,
-        width: double.infinity,
-        child: Padding(
-          padding: EdgeInsets.only(top: 10, left: 10,right: 10, bottom: 10),
-          child: ListView.builder(
-              itemCount: CatlogModel.items.length,
-              itemBuilder:(context, index){
-                return ItemWidget(
-                  item: CatlogModel.items[index],
-                );
-              }
+      body: Column(
+        children: [
+          Expanded(
+            // height: 150,
+            // width: double.infinity,
+            child: Padding(
+              padding: EdgeInsets.only(top: 10, left: 10,right: 10, bottom: 10),
+              child: (CatlogModel.items !=null ||  CatlogModel.items.isNotEmpty)
+                ?ListView.builder(
+                  itemCount: CatlogModel.items.length,
+                  itemBuilder:(context, index){
+                    return ItemWidget(
+                      item: CatlogModel.items[index],
+                    );
+                  }
+              )
+                  :Center(
+                child: CircularProgressIndicator(color: Colors.black,),
+              )
+            ),
           ),
-        ),
+        ],
       ),
     );
 
+
+  }
+
+  loadData() async {
+    await Future.delayed(Duration(seconds: 2));
+    final catlogJson =
+    await rootBundle.loadString("assets/files/catlog.json");
+    final decodeJson = jsonDecode(catlogJson);
+    final productData = decodeJson["products"];
+    CatlogModel.items = List.from(productData).map<Item>((item) => Item.fromMap(item))
+        .toList();
+    setState(() {});
 
   }
 }
